@@ -11,22 +11,22 @@ class Construct:
 
     worldChain = Blockchain()
 
-    def updateTier(player):
+    def updateTier(self, player):
         if(player.getLevel() > 20 ):
-            second = tier1
-            second.append(tier2)
+            second = self.tier1
+            second.append(self.tier2)
             self.playerList[player] = second
 
     def join(self, player):
-        playerList[player] = tier1
+        self.playerList[player] = self.tier1
 
     def travel(self, player):
         data = {
-            'name': str(random.choice(playerList[player])),
-            'level': random.randint(player.getLevel - self.diff + 2, player.getLevel + self.diff)
+            'name': str(random.choice(self.playerList[player])),
+            'level': random.randint(0, int(player.getLevel()) + self.diff)
         }
-        player.receivePokemon(worldChain.mine(Block(data, getDiff())
-        updateTier(player)
+        player.receivePokemon(self.worldChain.mine(Block(data), self.getDiff()))
+        self.updateTier(player)
 
     def getDiff(self):
         avglevel = 0

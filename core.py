@@ -1,8 +1,9 @@
 import datetime
 import hashlib
+import random
 
 class Block:
-    blockno = 0
+    blockNo = 0
     data = None
     next = None
     hash = None
@@ -12,6 +13,9 @@ class Block:
 
     def __init__(self, data):
         self.data = data
+
+    def getdata(self):
+        return self.data
 
     def hash(self):
         h = hashlib.sha256()
@@ -32,10 +36,10 @@ class Blockchain:
     maxNonce = 2**32
     starters = ['Charmander', 'Bulbasaur', 'Squirtle']
     genesisPokemon = {
-        'name': str(random.choice(starter)),
+        'name': str(random.choice(starters)),
         'level': 1
     }
-    block = block(genesisPokemon)
+    block = Block(genesisPokemon)
     dummy = head = block
 
     def add(self, block):
@@ -47,8 +51,8 @@ class Blockchain:
 
     def mine(self, block, diff):
         target = 2** (256-diff)
-        for n in rage(self.maxNonce):
-            if in(block.hash(), 16) <= target:
+        for n in range(self.maxNonce):
+            if int(block.hash(), 16) <= target:
                 self.add(block)
                 print(block)
                 return block
